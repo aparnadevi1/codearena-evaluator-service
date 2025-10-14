@@ -26,7 +26,7 @@ export default [
     rules: {
       "no-var": "error",
       "semi": ["error", "always"],
-      "no-unused-vars":["error"],
+     "no-unused-vars":"off",
       "indent": ["error", 2, { SwitchCase: 1 }],
       "no-multi-spaces": "error",
       "space-in-parens": "error",

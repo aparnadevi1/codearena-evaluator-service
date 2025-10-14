@@ -2,11 +2,8 @@ import Redis from "ioredis";
 
 import ServerConfig from "./serverConfig.js";
 
-const redisConfig = {
+export const redisConnection = new Redis({
   port: ServerConfig.REDIS_PORT,
   host: ServerConfig.REDIS_HOST,
-};
-
-const redisConnection = new Redis(redisConfig);
-
-export default redisConnection;
+  maxRetriesPerRequest: null,
+});
