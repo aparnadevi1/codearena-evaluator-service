@@ -6,9 +6,11 @@ import { z } from "zod";
 //   language: string;
 // }
 export type CreateSubmissionDto = z.infer<typeof createSubmissionZodSchema>;
-export const createSubmissionZodSchema = z.object({
-  userId: z.string(),
-  problemId: z.string(),
-  code: z.string(),
-  languauge: z.string(),
-  }).strict();
+export const createSubmissionZodSchema = z
+  .object({
+    userId: z.string(),
+    problemId: z.string(),
+    code: z.string(),
+    languauge: z.string(),
+  })
+  .strict();
