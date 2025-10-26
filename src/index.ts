@@ -2,6 +2,7 @@ import express, { Express } from "express";
 
 import bullBoardAdapter from "./config/bullBoardConfig.js";
 import serverConfig from "./config/serverConfig.js";
+import runPython from "./containers/runPythonDocker.js";
 import sampleQueueProducer from "./producers/sampleQueueProducer.js";
 import apiRouter from "./routes/index.js";
 import SampleWorker from "./workers/sampleWorker.js";
@@ -16,24 +17,33 @@ app.listen(serverConfig.PORT, () => {
     `BullBoard dashboard running on: http://localhost:${serverConfig.PORT}/ui`,
   );
   SampleWorker("SampleQueue");
-  sampleQueueProducer(
-    "SampleJob",
-    {
-      name: "Aparna",
-      company: "Google",
-      position: "SDE",
-      location: "BLR",
-    },
-    2,
-  );
-  sampleQueueProducer(
-    "SampleJob",
-    {
-      name: "Arun",
-      company: "Microsoft",
-      position: "SDE2",
-      location: "BLR",
-    },
-    1,
-  );
+  const code = `x = input()
+y = input()
+print("value of x is", x)
+print("value of y is", y)
+`;
+  const inputCase = `100
+200
+`;
+  runPython(code, inputCase);
+  // sampleQueueProducer(
+  //   "SampleJob",
+  //   {
+  //     name: "Aparna",
+  //     company: "Google",
+  //     position: "SDE",
+  //     location: "BLR",
+  //   },
+  //   2,
+  // );
+  // sampleQueueProducer(
+  //   "SampleJob",
+  //   {
+  //     name: "Arun",
+  //     company: "Microsoft",
+  //     position: "SDE2",
+  //     location: "BLR",
+  //   },
+  //   1,
+  // );
 });
